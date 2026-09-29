@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>घरकुल परिवार संस्था | खाद्यपदार्थ</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8ed;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #6b1f2a, #8b303d);
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 17px;
+            color: #ffe8b6;
+        }
+
+        .tagline {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        /* GENERAL */
+        section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 45px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #6b1f2a;
+            font-size: 27px;
+            margin-bottom: 25px;
+        }
+
+        /* ABOUT */
+        .about {
+            background: #fff;
+            margin: 30px auto;
+            border-radius: 18px;
+            max-width: 900px;
+            padding: 30px 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .about p {
+            color: #555;
+            font-size: 16px;
+        }
+
+        /* PRODUCTS */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #d4a84f;
+            transition: 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .product-card h3 {
+            color: #6b1f2a;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .weight {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .price {
+            color: #6b1f2a;
+            font-size: 21px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .per-kg {
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* ORDER */
+        .order-box {
+            background: #f7ecd8;
+            border-radius: 18px;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .order-box h2 {
+            color: #6b1f2a;
+            margin-bottom: 12px;
+        }
+
+        .order-box p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            padding: 13px 24px;
+            margin: 7px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .call-btn {
+            background: #6b1f2a;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+        }
+
+        .map-btn {
+            background: #d4a84f;
+        }
+
+        /* SUPPORT */
+        .support {
+            text-align: center;
+            background: white;
+            border-radius: 18px;
+            padding: 35px 20px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+        }
+
+        .support h2 {
+            color: #6b1f2a;
+            margin-bottom: 12px;
+        }
+
+        .support p {
+            color: #555;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        /* CONTACT */
+        .contact {
+            text-align: center;
+        }
+
+        .contact-info {
+            margin: 15px 0 20px;
+            color: #555;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #6b1f2a;
+            color: white;
+            text-align: center;
+            padding: 22px 15px;
+            margin-top: 20px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+
+            header {
+                padding: 35px 15px;
+            }
+
+            header h1 {
+                font-size: 26px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .btn {
+                display: block;
+                margin: 10px auto;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <h1>घरकुल परिवार संस्था</h1>
+
+        <p>खाद्यपदार्थ यादी</p>
+
+        <div class="tagline">
+            प्रेमाने बनवलेले • घरगुती चव • आपल्या माणसांसाठी
+        </div>
+    </header>
+
+
+    <!-- ABOUT US -->
+
+    <section>
+
+        <div class="about">
+
+            <h2 class="section-title">आमच्याबद्दल</h2>
+
+            <p>
+                Gharkul Parivar Sanstha is dedicated to creating opportunities
+                for women to develop their skills, creativity, and independence.
+                The organization offers a range of homemade food products and
+                handcrafted items, prepared with care and dedication.
+            </p>
+
+            <br>
+
+            <p>
+                Your support through every purchase helps encourage their skills
+                and contributes to a more independent and empowered future.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+
+    <section>
+
+        <h2 class="section-title">🍱 आमचे खाद्यपदार्थ</h2>
+
+        <div class="products">
+
+
+            <div class="product-card">
+                <h3>पोहेयांचा चिवडा</h3>
+                <div class="weight">250 ग्रॅम</div>
+                <div class="price">₹80</div>
+                <div class="per-kg">₹320 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>खारीपुरी</h3>
+                <div class="weight">200 ग्रॅम</div>
+                <div class="price">₹75</div>
+                <div class="per-kg">₹375 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>साधी / पालक शेव</h3>
+                <div class="weight">250 ग्रॅम</div>
+                <div class="price">₹75</div>
+                <div class="per-kg">₹300 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>गोड शंकरपाळे</h3>
+                <div class="weight">साजूक तुपातले • 250 ग्रॅम</div>
+                <div class="price">₹90</div>
+                <div class="per-kg">₹360 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>खारे शंकरपाळे</h3>
+                <div class="weight">250 ग्रॅम</div>
+                <div class="price">₹75</div>
+                <div class="per-kg">₹300 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>शेंगदाण्याचे लाडू</h3>
+                <div class="weight">250 ग्रॅम</div>
+                <div class="price">₹110</div>
+                <div class="per-kg">₹440 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>आळीव लाडू</h3>
+                <div class="weight">250 ग्रॅम</div>
+                <div class="price">₹125</div>
+                <div class="per-kg">₹500 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>ओल्या नारळाच्या करंज्या</h3>
+                <div class="weight">250 ग्रॅम</div>
+                <div class="price">₹150</div>
+                <div class="per-kg">₹600 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>मिरची लोणचं</h3>
+                <div class="weight">100 ग्रॅम</div>
+                <div class="price">₹40</div>
+                <div class="per-kg">₹400 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>ओल्या नारळाचा किस</h3>
+                <div class="weight">100 ग्रॅम</div>
+                <div class="price">₹60</div>
+                <div class="per-kg">₹600 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>आंबोळी / घिरडी पीठ</h3>
+                <div class="weight">500 ग्रॅम</div>
+                <div class="price">₹120</div>
+                <div class="per-kg">₹240 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>थालीपीठ भाजणी</h3>
+                <div class="weight">500 ग्रॅम</div>
+                <div class="price">₹125</div>
+                <div class="per-kg">₹250 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>उपवासाची भाजणी</h3>
+                <div class="weight">500 ग्रॅम</div>
+                <div class="price">₹125</div>
+                <div class="per-kg">₹250 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>नागली पापड</h3>
+                <div class="weight">50 नग</div>
+                <div class="price">₹160</div>
+                <div class="per-kg">—</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>नागली पापड</h3>
+                <div class="weight">1 किलो</div>
+                <div class="price">₹400</div>
+                <div class="per-kg">₹400 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>नागली पापड</h3>
+                <div class="weight">200 ग्रॅम</div>
+                <div class="price">₹80</div>
+                <div class="per-kg">—</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>बटाटा पापड</h3>
+                <div class="weight">250 ग्रॅम</div>
+                <div class="price">₹100</div>
+                <div class="per-kg">₹400 / किलो</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>कुरडया</h3>
+                <div class="weight">100 नग</div>
+                <div class="price">₹600</div>
+                <div class="per-kg">—</div>
+            </div>
+
+
+            <div class="product-card">
+                <h3>उडीद डिस्को पापड</h3>
+                <div class="weight">100 ग्रॅम</div>
+                <div class="price">₹45</div>
+                <div class="per-kg">—</div>
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- HOW TO ORDER -->
+
+    <section>
+
+        <div class="order-box">
+
+            <h2>🛍️ ऑर्डर कशी करावी?</h2>
+
+            <p>
+                तुम्हाला आवडलेला खाद्यपदार्थ निवडा आणि खालील WhatsApp
+                किंवा Call बटनावरून आमच्याशी संपर्क साधा.
+            </p>
+
+            <a
+                href="https://wa.me/919860552324?text=Hello%20Gharkul%20Parivar%20Sanstha%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products."
+                class="btn whatsapp-btn"
+                target="_blank">
+                💬 WhatsApp वर ऑर्डर करा
+            </a>
+
+            <a
+                href="tel:+919860552324"
+                class="btn call-btn">
+                📞 Call करा
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- SUPPORT -->
+
+    <section>
+
+        <div class="support">
+
+            <h2>💛 Support Gharkul</h2>
+
+            <p>
+                तुमची प्रत्येक खरेदी केवळ एक उत्पादन खरेदी नसून,
+                कौशल्यांना प्रोत्साहन देणारे आणि स्वावलंबनाला हातभार
+                लावणारे एक छोटेसे पाऊल आहे.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section>
+
+        <div class="contact">
+
+            <h2 class="section-title">📞 संपर्क</h2>
+
+            <div class="contact-info">
+
+                <p>
+                    <strong>Gharkul Parivar Sanstha</strong>
+                </p>
+
+                <p>
+                    Pimpalgaon Bahula, Trimbak Road, Nashik
+                </p>
+
+                <p>
+                    📱 +91 98605 52324
+                </p>
+
+            </div>
+
+
+            <a
+                href="tel:+919860552324"
+                class="btn call-btn">
+                📞 Call Us
+            </a>
+
+
+            <a
+                href="https://wa.me/919860552324"
+                class="btn whatsapp-btn"
+                target="_blank">
+                💬 WhatsApp
+            </a>
+
+
+            <a
+                href="https://www.google.com/maps/search/?api=1&query=Gharkul+Parivar+Sanstha+Pimpalgaon+Bahula+Trimbak+Road+Nashik"
+                class="btn map-btn"
+                target="_blank">
+                📍 View Location
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Gharkul Parivar Sanstha
+        </p>
+
+        <p>
+            Made with ❤️ for Gharkul
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
