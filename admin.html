@@ -5,68 +5,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>घारकुल - Admin Panel</title>
+    <title>घरकुल | Admin Panel</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, "Noto Sans Devanagari", sans-serif;
-            background-color: #fff8ed;
+            background: #fff8ed;
             margin: 0;
-            padding: 0;
+            color: #333;
         }
 
         header {
-            background-color: #6b1f2a;
+            background: linear-gradient(135deg, #6b1f2a, #8b303d);
             color: white;
-            padding: 20px;
             text-align: center;
+            padding: 25px 15px;
         }
 
         header h1 {
-            margin: 0 0 8px;
+            margin: 0;
             font-size: 28px;
         }
 
         header p {
-            margin: 0;
-            font-size: 16px;
+            margin: 8px 0 0;
+            color: #ffe8b6;
         }
 
         .container {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
+            max-width: 800px;
+            margin: 25px auto;
+            padding: 15px;
+        }
+
+        .note {
+            background: #fff3cd;
+            color: #664d03;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
 
         .food-card {
             background: white;
             padding: 20px;
             margin-bottom: 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border-left: 5px solid #d4a84f;
         }
 
-        .food-card h3 {
-            margin-top: 0;
-            margin-bottom: 15px;
+        .food-name {
             color: #6b1f2a;
-            font-size: 21px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .weight {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 12px;
         }
 
         label {
             display: block;
-            margin-bottom: 7px;
             font-weight: bold;
-            font-size: 16px;
+            margin-bottom: 7px;
         }
 
         input {
             width: 100%;
             padding: 12px;
-            box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 7px;
-            font-size: 16px;
+            font-size: 17px;
         }
 
         input:focus {
@@ -74,165 +92,263 @@
             border-color: #6b1f2a;
         }
 
-        button {
+        .save-btn {
             width: 100%;
-            padding: 13px;
+            padding: 15px;
             margin-top: 10px;
-            background-color: #6b1f2a;
-            color: white;
             border: none;
-            border-radius: 7px;
-            font-size: 17px;
+            border-radius: 10px;
+            background: #198754;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #8b303d;
+        .save-btn:hover {
+            background: #146c43;
         }
 
-        .message {
+        #message {
             text-align: center;
-            margin-top: 18px;
+            margin: 18px 0;
+            font-size: 17px;
             font-weight: bold;
-            font-size: 16px;
-        }
-
-        .footer {
-            text-align: center;
-            color: #777;
-            margin-top: 30px;
-            font-size: 14px;
+            color: green;
         }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>घारकुल Admin Panel</h1>
-        <p>खाद्यपदार्थांच्या किंमती व्यवस्थापन</p>
-    </header>
+<header>
+    <h1>🏠 घरकुल परिवार संस्था</h1>
+    <p>Admin Panel - खाद्यपदार्थांच्या किंमती</p>
+</header>
 
+<div class="container">
 
-    <div class="container">
-
-        <!-- लाडू -->
-        <div class="food-card">
-            <h3>🍬 लाडू</h3>
-
-            <label for="ladooPrice">किंमत (₹)</label>
-
-            <input
-                type="number"
-                id="ladooPrice"
-                placeholder="किंमत लिहा"
-            >
-        </div>
-
-
-        <!-- करंजी -->
-        <div class="food-card">
-            <h3>🥟 करंजी</h3>
-
-            <label for="karanjiPrice">किंमत (₹)</label>
-
-            <input
-                type="number"
-                id="karanjiPrice"
-                placeholder="किंमत लिहा"
-            >
-        </div>
-
-
-        <!-- चकली -->
-        <div class="food-card">
-            <h3>🥨 चकली</h3>
-
-            <label for="chakliPrice">किंमत (₹)</label>
-
-            <input
-                type="number"
-                id="chakliPrice"
-                placeholder="किंमत लिहा"
-            >
-        </div>
-
-
-        <!-- पापड -->
-        <div class="food-card">
-            <h3>🥙 पापड</h3>
-
-            <label for="papadPrice">किंमत (₹)</label>
-
-            <input
-                type="number"
-                id="papadPrice"
-                placeholder="किंमत लिहा"
-            >
-        </div>
-
-
-        <!-- Save Button -->
-        <button onclick="savePrices()">
-            💾 किंमती जतन करा
-        </button>
-
-
-        <!-- Message -->
-        <div class="message" id="message"></div>
-
-
-        <div class="footer">
-            © घारकुल
-        </div>
-
+    <div class="note">
+        💡 प्रत्येक पदार्थाची किंमत बदलून खालील
+        <b>किंमती जतन करा</b> बटन दाबा.
     </div>
 
 
-    <script>
-
-        function savePrices() {
-
-            const ladoo =
-                document.getElementById("ladooPrice").value;
-
-            const karanji =
-                document.getElementById("karanjiPrice").value;
-
-            const chakli =
-                document.getElementById("chakliPrice").value;
-
-            const papad =
-                document.getElementById("papadPrice").value;
+    <!-- 1 -->
+    <div class="food-card">
+        <div class="food-name">1. पोहेयांचा चिवडा</div>
+        <div class="weight">250 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="poheChivda" value="80">
+    </div>
 
 
-            localStorage.setItem(
-                "ladooPrice",
-                ladoo
-            );
-
-            localStorage.setItem(
-                "karanjiPrice",
-                karanji
-            );
-
-            localStorage.setItem(
-                "chakliPrice",
-                chakli
-            );
-
-            localStorage.setItem(
-                "papadPrice",
-                papad
-            );
+    <!-- 2 -->
+    <div class="food-card">
+        <div class="food-name">2. खारीपुरी</div>
+        <div class="weight">200 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="kharipuri" value="75">
+    </div>
 
 
-            document.getElementById("message").innerText =
-                "किंमती यशस्वीपणे जतन झाल्या! ✅";
-        }
+    <!-- 3 -->
+    <div class="food-card">
+        <div class="food-name">3. साधी / पालक शेव</div>
+        <div class="weight">250 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="shev" value="75">
+    </div>
 
-    </script>
+
+    <!-- 4 -->
+    <div class="food-card">
+        <div class="food-name">4. गोड शंकरपाळे</div>
+        <div class="weight">साजूक तुपातले • 250 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="godShankarpale" value="90">
+    </div>
+
+
+    <!-- 5 -->
+    <div class="food-card">
+        <div class="food-name">5. खारे शंकरपाळे</div>
+        <div class="weight">250 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="khareShankarpale" value="75">
+    </div>
+
+
+    <!-- 6 -->
+    <div class="food-card">
+        <div class="food-name">6. शेंगदाण्याचे लाडू</div>
+        <div class="weight">250 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="shengdanaLadu" value="110">
+    </div>
+
+
+    <!-- 7 -->
+    <div class="food-card">
+        <div class="food-name">7. आळीव लाडू</div>
+        <div class="weight">250 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="alivLadu" value="125">
+    </div>
+
+
+    <!-- 8 -->
+    <div class="food-card">
+        <div class="food-name">8. ओल्या नारळाच्या करंज्या</div>
+        <div class="weight">250 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="karanji" value="150">
+    </div>
+
+
+    <!-- 9 -->
+    <div class="food-card">
+        <div class="food-name">9. मिरची लोणचं</div>
+        <div class="weight">100 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="mirchiLonche" value="40">
+    </div>
+
+
+    <!-- 10 -->
+    <div class="food-card">
+        <div class="food-name">10. ओल्या नारळाचा किस</div>
+        <div class="weight">100 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="naralKis" value="60">
+    </div>
+
+
+    <!-- 11 -->
+    <div class="food-card">
+        <div class="food-name">11. आंबोळी / घिरडी पीठ</div>
+        <div class="weight">500 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="amboliPeeth" value="120">
+    </div>
+
+
+    <!-- 12 -->
+    <div class="food-card">
+        <div class="food-name">12. थालीपीठ भाजणी</div>
+        <div class="weight">500 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="thalipithBhajani" value="125">
+    </div>
+
+
+    <!-- 13 -->
+    <div class="food-card">
+        <div class="food-name">13. उपवासाची भाजणी</div>
+        <div class="weight">500 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="upvasBhajani" value="125">
+    </div>
+
+
+    <!-- 14 -->
+    <div class="food-card">
+        <div class="food-name">14. नागली पापड</div>
+        <div class="weight">50 नग</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="nagliPapad50" value="160">
+    </div>
+
+
+    <!-- 15 -->
+    <div class="food-card">
+        <div class="food-name">15. नागली पापड</div>
+        <div class="weight">1 किलो</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="nagliPapad1kg" value="400">
+    </div>
+
+
+    <!-- 16 -->
+    <div class="food-card">
+        <div class="food-name">16. नागली पापड</div>
+        <div class="weight">200 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="nagliPapad200g" value="80">
+    </div>
+
+
+    <!-- 17 -->
+    <div class="food-card">
+        <div class="food-name">17. बटाटा पापड</div>
+        <div class="weight">250 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="batataPapad" value="100">
+    </div>
+
+
+    <!-- 18 -->
+    <div class="food-card">
+        <div class="food-name">18. कुरडया</div>
+        <div class="weight">100 नग</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="kurdaya" value="600">
+    </div>
+
+
+    <!-- 19 -->
+    <div class="food-card">
+        <div class="food-name">19. उडीद डिस्को पापड</div>
+        <div class="weight">100 ग्रॅम</div>
+        <label>किंमत (₹)</label>
+        <input type="number" id="udidDiscoPapad" value="45">
+    </div>
+
+
+    <button class="save-btn" onclick="savePrices()">
+        💾 किंमती जतन करा
+    </button>
+
+    <div id="message"></div>
+
+</div>
+
+
+<script>
+
+function savePrices() {
+
+    const prices = {
+        poheChivda: document.getElementById("poheChivda").value,
+        kharipuri: document.getElementById("kharipuri").value,
+        shev: document.getElementById("shev").value,
+        godShankarpale: document.getElementById("godShankarpale").value,
+        khareShankarpale: document.getElementById("khareShankarpale").value,
+        shengdanaLadu: document.getElementById("shengdanaLadu").value,
+        alivLadu: document.getElementById("alivLadu").value,
+        karanji: document.getElementById("karanji").value,
+        mirchiLonche: document.getElementById("mirchiLonche").value,
+        naralKis: document.getElementById("naralKis").value,
+        amboliPeeth: document.getElementById("amboliPeeth").value,
+        thalipithBhajani: document.getElementById("thalipithBhajani").value,
+        upvasBhajani: document.getElementById("upvasBhajani").value,
+        nagliPapad50: document.getElementById("nagliPapad50").value,
+        nagliPapad1kg: document.getElementById("nagliPapad1kg").value,
+        nagliPapad200g: document.getElementById("nagliPapad200g").value,
+        batataPapad: document.getElementById("batataPapad").value,
+        kurdaya: document.getElementById("kurdaya").value,
+        udidDiscoPapad: document.getElementById("udidDiscoPapad").value
+    };
+
+    Object.keys(prices).forEach(function(key) {
+        localStorage.setItem(key, prices[key]);
+    });
+
+    document.getElementById("message").innerHTML =
+        "किंमती यशस्वीपणे जतन झाल्या! ✅";
+}
+
+</script>
 
 </body>
-
 </html>
