@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>घारकुल - Admin Panel</title>
+
+    <style>
+        body {
+            font-family: Arial, "Noto Sans Devanagari", sans-serif;
+            background-color: #fff8ed;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #6b1f2a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 28px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .food-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .food-card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #6b1f2a;
+            font-size: 21px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #6b1f2a;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 10px;
+            background-color: #6b1f2a;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #8b303d;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 18px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #777;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>घारकुल Admin Panel</h1>
+        <p>खाद्यपदार्थांच्या किंमती व्यवस्थापन</p>
+    </header>
+
+
+    <div class="container">
+
+        <!-- लाडू -->
+        <div class="food-card">
+            <h3>🍬 लाडू</h3>
+
+            <label for="ladooPrice">किंमत (₹)</label>
+
+            <input
+                type="number"
+                id="ladooPrice"
+                placeholder="किंमत लिहा"
+            >
+        </div>
+
+
+        <!-- करंजी -->
+        <div class="food-card">
+            <h3>🥟 करंजी</h3>
+
+            <label for="karanjiPrice">किंमत (₹)</label>
+
+            <input
+                type="number"
+                id="karanjiPrice"
+                placeholder="किंमत लिहा"
+            >
+        </div>
+
+
+        <!-- चकली -->
+        <div class="food-card">
+            <h3>🥨 चकली</h3>
+
+            <label for="chakliPrice">किंमत (₹)</label>
+
+            <input
+                type="number"
+                id="chakliPrice"
+                placeholder="किंमत लिहा"
+            >
+        </div>
+
+
+        <!-- पापड -->
+        <div class="food-card">
+            <h3>🥙 पापड</h3>
+
+            <label for="papadPrice">किंमत (₹)</label>
+
+            <input
+                type="number"
+                id="papadPrice"
+                placeholder="किंमत लिहा"
+            >
+        </div>
+
+
+        <!-- Save Button -->
+        <button onclick="savePrices()">
+            💾 किंमती जतन करा
+        </button>
+
+
+        <!-- Message -->
+        <div class="message" id="message"></div>
+
+
+        <div class="footer">
+            © घारकुल
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function savePrices() {
+
+            const ladoo =
+                document.getElementById("ladooPrice").value;
+
+            const karanji =
+                document.getElementById("karanjiPrice").value;
+
+            const chakli =
+                document.getElementById("chakliPrice").value;
+
+            const papad =
+                document.getElementById("papadPrice").value;
+
+
+            localStorage.setItem(
+                "ladooPrice",
+                ladoo
+            );
+
+            localStorage.setItem(
+                "karanjiPrice",
+                karanji
+            );
+
+            localStorage.setItem(
+                "chakliPrice",
+                chakli
+            );
+
+            localStorage.setItem(
+                "papadPrice",
+                papad
+            );
+
+
+            document.getElementById("message").innerText =
+                "किंमती यशस्वीपणे जतन झाल्या! ✅";
+        }
+
+    </script>
+
+</body>
+
+</html>
