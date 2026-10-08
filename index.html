@@ -557,7 +557,177 @@
         </p>
 
     </footer>
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    get
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+// 🔥 Firebase Config
+const firebaseConfig = {
+    apiKey: "AIzaSyBo_uwkCTvpDL4jys5TsMrjtlz4HwIiRdo",
+    authDomain: "gharkul-parivar.firebaseapp.com",
+    projectId: "gharkul-parivar",
+    storageBucket: "gharkul-parivar.firebasestorage.app",
+    messagingSenderId: "468575393306",
+    appId: "1:468575393306:web:71e4deceb42d8eeeafa3a3",
+    measurementId: "G-9SHMT64HPX"
+};
+
+
+// Firebase सुरू करा
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+
+// Product IDs - Admin page सारखेच
+const productIds = [
+    "poheChivda",
+    "kharipuri",
+    "shev",
+    "godShankarpale",
+    "khareShankarpale",
+    "shengdanaLadu",
+    "alivLadu",
+    "karanji",
+    "mirchiLonche",
+    "naralKis",
+    "amboliPeeth",
+    "thalipithBhajani",
+    "upvasBhajani",
+    "nagliPapad50",
+    "nagliPapad1kg",
+    "nagliPapad200g",
+    "batataPapad",
+    "kurdaya",
+    "udidDiscoPapad"
+];
+
+
+// प्रत्येक product चा वजनानुसार किलोचा multiplier
+// 250g = 4 पट
+// 200g = 5 पट
+// 100g = 10 पट
+// 500g = 2 पट
+// 1kg = 1 पट
+// नग असलेल्या पदार्थांसाठी null
+const perKgMultiplier = [
+    4,    // पोहेयांचा चिवडा - 250g
+    5,    // खारीपुरी - 200g
+    4,    // शेव - 250g
+    4,    // गोड शंकरपाळे - 250g
+    4,    // खारे शंकरपाळे - 250g
+    4,    // शेंगदाण्याचे लाडू - 250g
+    4,    // आळीव लाडू - 250g
+    4,    // करंज्या - 250g
+    10,   // मिरची लोणचं - 100g
+    10,   // नारळाचा किस - 100g
+    2,    // आंबोळी / घिरडी पीठ - 500g
+    2,    // थालीपीठ भाजणी - 500g
+    2,    // उपवासाची भाजणी - 500g
+    null, // नागली पापड - 50 नग
+    1,    // नागली पापड - 1kg
+    null, // नागली पापड - 200g (सध्या —)
+    4,    // बटाटा पापड - 250g
+    null, // कुरडया - 100 नग
+    null  // उडीद डिस्को पापड - 100g (सध्या —)
+];
+
+
+// Firebase मधून नवीन prices आणा
+async function loadCustomerPrices() {
+
+    try {
+
+        const pricesRef = ref(db, "prices");
+
+        const snapshot = await get(pricesRef);
+
+
+        if (!snapshot.exists()) {
+
+            console.log("Firebase मध्ये prices अजून उपलब्ध नाहीत.");
+
+            return;
+        }
+
+
+        const prices = snapshot.val();
+
+
+        // सर्व price elements
+        const priceElements =
+            document.querySelectorAll(".price");
+
+
+        // सर्व per-kg elements
+        const perKgElements =
+            document.querySelectorAll(".per-kg");
+
+
+        productIds.forEach(function(id, index) {
+
+            const price = Number(prices[id]);
+
+
+            // Price उपलब्ध असेल तर update करा
+            if (
+                prices[id] !== undefined &&
+                !isNaN(price) &&
+                price >= 0
+            ) {
+
+                // ₹ price update
+                if (priceElements[index]) {
+
+                    priceElements[index].textContent =
+                        "₹" + price;
+
+                }
+
+
+                // Per kg update
+                if (
+                    perKgElements[index] &&
+                    perKgMultiplier[index] !== null
+                ) {
+
+                    const perKg =
+                        price * perKgMultiplier[index];
+
+                    perKgElements[index].textContent =
+                        "₹" + perKg + " / किलो";
+
+                }
+
+            }
+
+        });
+
+
+        console.log("Firebase prices successfully loaded ✅");
+
+    } catch (error) {
+
+        console.error(
+            "Firebase prices load error:",
+            error
+        );
+
+    }
+
+}
+
+
+// Page load झाल्यावर prices आणा
+loadCustomerPrices();
+
+</script>
 
 </body>
 
