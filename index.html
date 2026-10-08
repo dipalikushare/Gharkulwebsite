@@ -208,45 +208,78 @@
         footer p {
             font-size: 14px;
         }
+        /* GHARKUL LOGO HEADER */
 
+.brand {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand-text {
+    text-align: center;
+}
+
+/* GHARKUL LOGO HEADER */
+
+.brand {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand-text {
+    text-align: center;
+}
+
+.brand-text h1 {
+    margin: 0;
+}
+
+.brand-text p {
+    margin: 5px 0 0;
+}
+
+.brand img {
+    position: absolute;
+    left: 80px;
+    top: 10%;
+    transform: translateY(-50);
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
         /* MOBILE */
-        @media (max-width: 600px) {
+        
 
-            header {
-                padding: 35px 15px;
-            }
-
-            header h1 {
-                font-size: 26px;
-            }
-
-            .section-title {
-                font-size: 24px;
-            }
-
-            .btn {
-                display: block;
-                margin: 10px auto;
-                max-width: 320px;
-            }
-        }
+  
     </style>
 </head>
 
 
 <body>
-
-    <!-- HEADER -->
+      
 
     <header>
-        <h1>घरकुल परिवार संस्था</h1>
+    <div class="brand">
 
-        <p>खाद्यपदार्थ यादी</p>
-
-        <div class="tagline">
-            प्रेमाने बनवलेले • घरगुती चव • आपल्या माणसांसाठी
+        <div class="brand-text">
+            <h1>घरकुल परिवार संस्था</h1>
+            <p>खाद्यपदार्थ यादी</p>
         </div>
-    </header>
+
+        <img src="gharkul-logo.jpg.jpeg" alt="Gharkul Logo">
+
+    </div>
+
+    <div class="tagline">
+        प्रेमाने बनवलेले • घरगुती चव • आपल्या माणसांसाठी
+    </div>
+</header>
 
 
     <!-- ABOUT US -->
@@ -255,23 +288,24 @@
 
         <div class="about">
 
-            <h2 class="section-title">आमच्याबद्दल</h2>
+    <h2 class="section-title">घरकुल परिवार संस्थेबद्दल</h2>
 
-            <p>
-                Gharkul Parivar Sanstha is dedicated to creating opportunities
-                for women to develop their skills, creativity, and independence.
-                The organization offers a range of homemade food products and
-                handcrafted items, prepared with care and dedication.
-            </p>
+    <p>
+        घरकुल परिवार संस्था ही महिलांना त्यांच्या कौशल्यांचा विकास,
+        सर्जनशीलता आणि स्वावलंबन वाढवण्यासाठी संधी उपलब्ध करून देण्यासाठी
+        कार्यरत आहे. संस्थेमध्ये विविध घरगुती खाद्यपदार्थ तसेच हस्तकलेच्या
+        वस्तू प्रेमाने आणि काळजीपूर्वक तयार केल्या जातात.
+    </p>
 
-            <br>
+    <br>
 
-            <p>
-                Your support through every purchase helps encourage their skills
-                and contributes to a more independent and empowered future.
-            </p>
+    <p>
+        आपण केलेली प्रत्येक खरेदी त्यांच्या कौशल्यांना प्रोत्साहन देण्यास
+        आणि त्यांना अधिक स्वावलंबी व सक्षम बनण्यास हातभार लावते.
+        आपला छोटासा सहभाग त्यांच्या उज्ज्वल भविष्यासाठी एक महत्त्वाचे पाऊल आहे.
+    </p>
 
-        </div>
+</div>
 
     </section>
 
@@ -463,9 +497,22 @@
             </a>
 
             <a
+                href="https://wa.me/919699091233?text=Hello%20Gharkul%20Parivar%20Sanstha%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products."
+                class="btn whatsapp-btn"
+                target="_blank">
+                💬 WhatsApp वर ऑर्डर करा - 96990 91233
+            </a>
+
+            <a
                 href="tel:+919860552324"
                 class="btn call-btn">
                 📞 Call करा
+            </a>
+
+            <a
+               href="tel:+919699091233"
+               class="btn call-btn">
+               📞 Call करा - 96990 91233
             </a>
 
         </div>
@@ -557,177 +604,7 @@
         </p>
 
     </footer>
-<script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-    getDatabase,
-    ref,
-    get
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-
-// 🔥 Firebase Config
-const firebaseConfig = {
-    apiKey: "AIzaSyBo_uwkCTvpDL4jys5TsMrjtlz4HwIiRdo",
-    authDomain: "gharkul-parivar.firebaseapp.com",
-    projectId: "gharkul-parivar",
-    storageBucket: "gharkul-parivar.firebasestorage.app",
-    messagingSenderId: "468575393306",
-    appId: "1:468575393306:web:71e4deceb42d8eeeafa3a3",
-    measurementId: "G-9SHMT64HPX"
-};
-
-
-// Firebase सुरू करा
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-
-// Product IDs - Admin page सारखेच
-const productIds = [
-    "poheChivda",
-    "kharipuri",
-    "shev",
-    "godShankarpale",
-    "khareShankarpale",
-    "shengdanaLadu",
-    "alivLadu",
-    "karanji",
-    "mirchiLonche",
-    "naralKis",
-    "amboliPeeth",
-    "thalipithBhajani",
-    "upvasBhajani",
-    "nagliPapad50",
-    "nagliPapad1kg",
-    "nagliPapad200g",
-    "batataPapad",
-    "kurdaya",
-    "udidDiscoPapad"
-];
-
-
-// प्रत्येक product चा वजनानुसार किलोचा multiplier
-// 250g = 4 पट
-// 200g = 5 पट
-// 100g = 10 पट
-// 500g = 2 पट
-// 1kg = 1 पट
-// नग असलेल्या पदार्थांसाठी null
-const perKgMultiplier = [
-    4,    // पोहेयांचा चिवडा - 250g
-    5,    // खारीपुरी - 200g
-    4,    // शेव - 250g
-    4,    // गोड शंकरपाळे - 250g
-    4,    // खारे शंकरपाळे - 250g
-    4,    // शेंगदाण्याचे लाडू - 250g
-    4,    // आळीव लाडू - 250g
-    4,    // करंज्या - 250g
-    10,   // मिरची लोणचं - 100g
-    10,   // नारळाचा किस - 100g
-    2,    // आंबोळी / घिरडी पीठ - 500g
-    2,    // थालीपीठ भाजणी - 500g
-    2,    // उपवासाची भाजणी - 500g
-    null, // नागली पापड - 50 नग
-    1,    // नागली पापड - 1kg
-    null, // नागली पापड - 200g (सध्या —)
-    4,    // बटाटा पापड - 250g
-    null, // कुरडया - 100 नग
-    null  // उडीद डिस्को पापड - 100g (सध्या —)
-];
-
-
-// Firebase मधून नवीन prices आणा
-async function loadCustomerPrices() {
-
-    try {
-
-        const pricesRef = ref(db, "prices");
-
-        const snapshot = await get(pricesRef);
-
-
-        if (!snapshot.exists()) {
-
-            console.log("Firebase मध्ये prices अजून उपलब्ध नाहीत.");
-
-            return;
-        }
-
-
-        const prices = snapshot.val();
-
-
-        // सर्व price elements
-        const priceElements =
-            document.querySelectorAll(".price");
-
-
-        // सर्व per-kg elements
-        const perKgElements =
-            document.querySelectorAll(".per-kg");
-
-
-        productIds.forEach(function(id, index) {
-
-            const price = Number(prices[id]);
-
-
-            // Price उपलब्ध असेल तर update करा
-            if (
-                prices[id] !== undefined &&
-                !isNaN(price) &&
-                price >= 0
-            ) {
-
-                // ₹ price update
-                if (priceElements[index]) {
-
-                    priceElements[index].textContent =
-                        "₹" + price;
-
-                }
-
-
-                // Per kg update
-                if (
-                    perKgElements[index] &&
-                    perKgMultiplier[index] !== null
-                ) {
-
-                    const perKg =
-                        price * perKgMultiplier[index];
-
-                    perKgElements[index].textContent =
-                        "₹" + perKg + " / किलो";
-
-                }
-
-            }
-
-        });
-
-
-        console.log("Firebase prices successfully loaded ✅");
-
-    } catch (error) {
-
-        console.error(
-            "Firebase prices load error:",
-            error
-        );
-
-    }
-
-}
-
-
-// Page load झाल्यावर prices आणा
-loadCustomerPrices();
-
-</script>
 
 </body>
 
