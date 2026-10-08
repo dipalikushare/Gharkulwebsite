@@ -314,39 +314,135 @@
 </div>
 
 
-<script>
+<script type="module">
 
-function savePrices() {
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+    getDatabase,
+    ref,
+    get,
+    set
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-    const prices = {
-        poheChivda: document.getElementById("poheChivda").value,
-        kharipuri: document.getElementById("kharipuri").value,
-        shev: document.getElementById("shev").value,
-        godShankarpale: document.getElementById("godShankarpale").value,
-        khareShankarpale: document.getElementById("khareShankarpale").value,
-        shengdanaLadu: document.getElementById("shengdanaLadu").value,
-        alivLadu: document.getElementById("alivLadu").value,
-        karanji: document.getElementById("karanji").value,
-        mirchiLonche: document.getElementById("mirchiLonche").value,
-        naralKis: document.getElementById("naralKis").value,
-        amboliPeeth: document.getElementById("amboliPeeth").value,
-        thalipithBhajani: document.getElementById("thalipithBhajani").value,
-        upvasBhajani: document.getElementById("upvasBhajani").value,
-        nagliPapad50: document.getElementById("nagliPapad50").value,
-        nagliPapad1kg: document.getElementById("nagliPapad1kg").value,
-        nagliPapad200g: document.getElementById("nagliPapad200g").value,
-        batataPapad: document.getElementById("batataPapad").value,
-        kurdaya: document.getElementById("kurdaya").value,
-        udidDiscoPapad: document.getElementById("udidDiscoPapad").value
-    };
 
-    Object.keys(prices).forEach(function(key) {
-        localStorage.setItem(key, prices[key]);
+// 🔥 YOUR FIREBASE CONFIG
+const firebaseConfig = {
+    apiKey: "AIzaSyBo_uwkCTvpDL4jys5TsMrjtlz4HwIiRdo",
+    authDomain: "gharkul-parivar.firebaseapp.com",
+    projectId: "gharkul-parivar",
+    storageBucket: "gharkul-parivar.firebasestorage.app",
+    messagingSenderId: "468575393306",
+    appId: "1:468575393306:web:71e4deceb42d8eeeafa3a3",
+    measurementId: "G-9SHMT64HPX"
+};
+
+
+// Firebase सुरू करा
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+
+// सर्व product IDs
+const productIds = [
+    "poheChivda",
+    "kharipuri",
+    "shev",
+    "godShankarpale",
+    "khareShankarpale",
+    "shengdanaLadu",
+    "alivLadu",
+    "karanji",
+    "mirchiLonche",
+    "naralKis",
+    "amboliPeeth",
+    "thalipithBhajani",
+    "upvasBhajani",
+    "nagliPapad50",
+    "nagliPapad1kg",
+    "nagliPapad200g",
+    "batataPapad",
+    "kurdaya",
+    "udidDiscoPapad"
+];
+
+
+// Firebase मधून prices load करा
+async function loadPrices() {
+
+    try {
+
+        const pricesRef = ref(db, "prices");
+        const snapshot = await get(pricesRef);
+
+        if (snapshot.exists()) {
+
+            const prices = snapshot.val();
+
+            productIds.forEach(function(id) {
+
+                if (prices[id] !== undefined) {
+
+                    document.getElementById(id).value = prices[id];
+
+                }
+
+            });
+
+            document.getElementById("message").innerHTML =
+                "किंमती Firebase मधून लोड झाल्या! ✅";
+
+        } else {
+
+            document.getElementById("message").innerHTML =
+                "पहिल्यांदा किंमती Save करा.";
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("message").innerHTML =
+            "Firebase मधून किंमती लोड करता आल्या नाहीत ❌";
+
+    }
+}
+
+
+// Firebase मध्ये prices save करा
+window.savePrices = async function() {
+
+    const prices = {};
+
+    productIds.forEach(function(id) {
+
+        prices[id] =
+            Number(document.getElementById(id).value);
+
     });
 
-    document.getElementById("message").innerHTML =
-        "किंमती यशस्वीपणे जतन झाल्या! ✅";
-}
+
+    try {
+
+        await set(ref(db, "prices"), prices);
+
+        document.getElementById("message").innerHTML =
+            "किंमती Firebase मध्ये यशस्वीरित्या जतन झाल्या! ✅";
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("message").innerHTML =
+            "किंमती जतन करता आल्या नाहीत ❌";
+
+    }
+
+};
+
+
+// Page उघडल्यावर prices load
+loadPrices();
 
 </script>
 
