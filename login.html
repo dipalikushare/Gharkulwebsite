@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gharkul Admin Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #fff8ed;
+        }
+
+        .login-box {
+            width: 90%;
+            max-width: 380px;
+            padding: 30px;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        h2 {
+            text-align: center;
+            color: #6b1f2a;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin: 14px 0 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: 2px solid #8b303d;
+            border-color: #8b303d;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 12px;
+            background: #6b1f2a;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #8b303d;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #message {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+        <h2>Gharkul Parivar</h2>
+
+        <p class="subtitle">Admin Login Panel</p>
+
+        <form id="loginForm">
+
+            <label for="email">Email Address</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter admin email"
+                autocomplete="username"
+                required
+            >
+
+            <label for="password">Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                autocomplete="current-password"
+                required
+            >
+
+             <button type="submit" id="loginButton">
+    Login
+</button>
+
+<button type="button" id="verifyButton" style="display:none;">
+    Send Verification Email
+</button>
+
+<p id="message" role="status"></p>
+
+        </form>
+    </div>
+
+    <script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    sendEmailVerification,
+    signOut,
+    reload
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDZewUAZpkjiEvN1ShvtrGRCUNA0qckJtY",
+    authDomain: "gharkul-qrcode.firebaseapp.com",
+    projectId: "gharkul-qrcode",
+    storageBucket: "gharkul-qrcode.firebasestorage.app",
+    messagingSenderId: "688092451164",
+    appId: "1:688092451164:web:b66eb674f96cd951b0b199"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// HTML elements
+const form = document.getElementById("loginForm");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const button = document.getElementById("loginButton");
+const verifyButton = document.getElementById("verifyButton");
+const message = document.getElementById("message");
+
+let verificationUser = null;
+
+// LOGIN
+form.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    button.disabled = true;
+    verifyButton.style.display = "none";
+
+    message.style.color = "#666";
+    message.textContent = "Login होत आहे...";
+
+    try {
+
+        const credential = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        const user = credential.user;
+
+        await reload(user);
+
+        if (!user.emailVerified) {
+
+            verificationUser = user;
+
+            message.style.color = "#b45309";
+            message.textContent =
+                "तुमचा Email Verify झालेला नाही. खालील बटन दाबा.";
+
+            verifyButton.style.display = "block";
+
+            await signOut(auth);
+
+            button.disabled = false;
+            button.textContent = "Login";
+
+            return;
+        }
+
+        message.style.color = "green";
+        message.textContent = "Login successful!";
+
+        window.location.assign("admin.html");
+
+    } catch (error) {
+
+        console.error("Login error:", error);
+
+        message.style.color = "red";
+
+        if (
+            error.code === "auth/invalid-credential" ||
+            error.code === "auth/wrong-password" ||
+            error.code === "auth/user-not-found" ||
+            error.code === "auth/invalid-login-credentials"
+        ) {
+            message.textContent =
+                "Email किंवा password चुकीचा आहे.";
+        } else if (
+            error.code === "auth/too-many-requests"
+        ) {
+            message.textContent =
+                "खूप प्रयत्न झाले. थोड्या वेळाने पुन्हा प्रयत्न करा.";
+        } else if (
+            error.code === "auth/network-request-failed"
+        ) {
+            message.textContent =
+                "Internet connection तपासा.";
+        } else {
+            message.textContent =
+                "Login failed: " + error.code;
+        }
+
+    } finally {
+        button.disabled = false;
+        button.textContent = "Login";
+    }
+
+});
+
+// SEND VERIFICATION EMAIL
+verifyButton.addEventListener("click", async () => {
+
+    if (!verificationUser) {
+        message.style.color = "red";
+        message.textContent =
+            "आधी योग्य email आणि password ने login करा.";
+        return;
+    }
+
+    verifyButton.disabled = true;
+    message.style.color = "#666";
+    message.textContent = "Verification email पाठवत आहोत...";
+
+    try {
+
+        await sendEmailVerification(verificationUser);
+
+        message.style.color = "green";
+        message.textContent =
+            "Verification email पाठवला आहे! Gmail मधील Inbox आणि Spam तपासा.";
+
+    } catch (error) {
+
+        console.error("Verification error:", error);
+
+        message.style.color = "red";
+
+        if (error.code === "auth/too-many-requests") {
+            message.textContent =
+                "खूप emails मागवले आहेत. थोड्या वेळाने पुन्हा प्रयत्न करा.";
+        } else {
+            message.textContent =
+                "Email पाठवता आला नाही: " + error.code;
+        }
+
+    } finally {
+        verifyButton.disabled = false;
+    }
+
+});
+
+</script>
+
+</body>
+</html>

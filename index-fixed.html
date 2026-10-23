@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>घरकुल परिवार संस्था | खाद्यपदार्थ</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8ed;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6b1f2a, #8b303d);
+            color: white;
+            text-align: center;
+            padding: 35px 15px;
+        }
+
+        .brand {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .brand img {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+        }
+
+        header h1 {
+            font-size: 30px;
+        }
+
+        header p {
+            color: #ffe8b6;
+        }
+
+        .tagline {
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #6b1f2a;
+            font-size: 27px;
+            margin-bottom: 25px;
+        }
+
+        .about,
+        .support {
+            background: white;
+            border-radius: 18px;
+            padding: 30px 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #d4a84f;
+        }
+
+        .product-card h3 {
+            color: #6b1f2a;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .weight {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .price {
+            color: #6b1f2a;
+            font-size: 21px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .per-kg {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .order-box {
+            background: #f7ecd8;
+            border-radius: 18px;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            padding: 12px 20px;
+            margin: 7px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .call-btn {
+            background: #6b1f2a;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+        }
+
+        .map-btn {
+            background: #d4a84f;
+        }
+
+        .support {
+            margin-top: 20px;
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact-info {
+            margin: 15px 0 20px;
+            color: #555;
+        }
+
+        footer {
+            background: #6b1f2a;
+            color: white;
+            text-align: center;
+            padding: 22px 15px;
+        }
+
+        #price-status {
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            .brand img {
+                width: 65px;
+                height: 65px;
+            }
+
+            .section-title {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand">
+        <img src="gharkul-logo.jpg.jpeg" alt="Gharkul Logo">
+
+        <div>
+            <h1>घरकुल परिवार संस्था</h1>
+            <p>खाद्यपदार्थ यादी</p>
+        </div>
+    </div>
+
+    <div class="tagline">
+        प्रेमाने बनवलेले • घरगुती चव • आपल्या माणसांसाठी
+    </div>
+</header>
+
+<section>
+    <div class="about">
+        <h2 class="section-title">घरकुल परिवार संस्थेबद्दल</h2>
+
+        <p>
+            घरकुल परिवार संस्था ही महिलांना त्यांच्या कौशल्यांचा विकास,
+            सर्जनशीलता आणि स्वावलंबन वाढवण्यासाठी संधी उपलब्ध करून देते.
+            संस्थेमध्ये विविध घरगुती खाद्यपदार्थ तसेच हस्तकलेच्या वस्तू
+            प्रेमाने आणि काळजीपूर्वक तयार केल्या जातात.
+        </p>
+
+        <br>
+
+        <p>
+            आपण केलेली प्रत्येक खरेदी त्यांच्या कौशल्यांना प्रोत्साहन
+            देण्यास आणि त्यांना अधिक स्वावलंबी बनण्यास हातभार लावते.
+        </p>
+    </div>
+</section>
+
+<section>
+    <h2 class="section-title">🍱 आमचे खाद्यपदार्थ</h2>
+
+    <p id="price-status" aria-live="polite">
+        खाद्यपदार्थांच्या किंमती लोड होत आहेत...
+    </p>
+
+    <div class="products">
+
+        <div class="product-card" data-product-key="Pohe chiwda">
+            <h3>पोहेयांचा चिवडा</h3>
+            <div class="weight">250 ग्रॅम</div>
+            <div class="price">₹80</div>
+            <div class="per-kg">₹320 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="khari puri">
+            <h3>खारीपुरी</h3>
+            <div class="weight">200 ग्रॅम</div>
+            <div class="price">₹75</div>
+            <div class="per-kg">₹375 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="sadhi palak shev">
+            <h3>साधी / पालक शेव</h3>
+
+            <div class="weight">250 ग्रॅम</div>
+            <div class="price">₹75</div>
+            <div class="per-kg">₹300 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="god shankarpale (shajuk tupatle)">
+            <h3>गोड शंकरपाळे</h3>
+            <div class="weight">साजूक तुपातले • 250 ग्रॅम</div>
+            <div class="price">₹90</div>
+            <div class="per-kg">₹360 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="khare shankarpale">
+            <h3>खारे शंकरपाळे</h3>
+            <div class="weight">250 ग्रॅम</div>
+            <div class="price">₹75</div>
+            <div class="per-kg">₹300 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key=" sheng danyache ladu">
+            <h3>शेंगदाण्याचे लाडू</h3>
+            <div class="weight">250 ग्रॅम</div>
+            <div class="price">₹110</div>
+            <div class="per-kg">₹440 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="Aaliv Ladu">
+            <h3>आळीव लाडू</h3>
+            <div class="weight">250 ग्रॅम</div>
+            <div class="price">₹125</div>
+            <div class="per-kg">₹500 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="olya naralachya karnjya"
+>
+            <h3>ओल्या नारळाच्या करंज्या</h3>
+            <div class="weight">250 ग्रॅम</div>
+            <div class="price">₹150</div>
+            <div class="per-kg">₹600 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="mirchi lonch">
+            <h3>मिरची लोणचं</h3>
+            <div class="weight">100 ग्रॅम</div>
+            <div class="price">₹40</div>
+            <div class="per-kg">₹400 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="olya naralacha kis">
+            <h3>ओल्या नारळाचा किस</h3>
+            <div class="weight">100 ग्रॅम</div>
+            <div class="price">₹60</div>
+            <div class="per-kg">₹600 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="Aaboli \ dhirdi pith">
+            <h3>आंबोळी / घिरडी पीठ</h3>
+            <div class="weight">500 ग्रॅम</div>
+            <div class="price">₹120</div>
+            <div class="per-kg">₹240 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="thalpith bhajni">
+            <h3>थालीपीठ भाजणी</h3>
+            <div class="weight">500 ग्रॅम</div>
+            <div class="price">₹125</div>
+            <div class="per-kg">₹250 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="Upwasachi bhajni">
+            <h3>उपवासाची भाजणी</h3>
+            <div class="weight">500 ग्रॅम</div>
+            <div class="price">₹125</div>
+            <div class="per-kg">₹250 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="Nagli Papad(50 nag)">
+            <h3>नागली पापड</h3>
+            <div class="weight">50 नग</div>
+            <div class="price">₹160</div>
+            <div class="per-kg">—</div>
+        </div>
+
+        <div class="product-card" data-product-key="Nagli Papad(1kg)">
+            <h3>नागली पापड</h3>
+            <div class="weight">1 किलो</div>
+            <div class="price">₹400</div>
+            <div class="per-kg">₹400 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="Nagli Papad">
+            <h3>नागली पापड</h3>
+            <div class="weight">200 ग्रॅम</div>
+            <div class="price">₹80</div>
+            <div class="per-kg">—</div>
+        </div>
+
+        <div class="product-card" data-product-key="Batata Papad">
+            <h3>बटाटा पापड</h3>
+            <div class="weight">250 ग्रॅम</div>
+            <div class="price">₹100</div>
+            <div class="per-kg">₹400 / किलो</div>
+        </div>
+
+        <div class="product-card" data-product-key="kurdya">
+            <h3>कुरडया</h3>
+            <div class="weight">100 नग</div>
+            <div class="price">₹600</div>
+            <div class="per-kg">—</div>
+        </div>
+
+        <div class="product-card" data-product-key="Udid Papad">
+            <h3>उडीद डिस्को पापड</h3>
+            <div class="weight">100 ग्रॅम</div>
+            <div class="price">₹45</div>
+            <div class="per-kg">—</div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="order-box">
+        <h2>🛍️ ऑर्डर कशी करावी?</h2>
+
+        <p>
+            तुम्हाला आवडलेला खाद्यपदार्थ निवडा आणि खालील WhatsApp
+            किंवा Call बटनावरून आमच्याशी संपर्क साधा.
+        </p>
+
+        <a
+            href="https://wa.me/919860552324?text=Hello%20Gharkul%20Parivar%20Sanstha%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products."
+            class="btn whatsapp-btn"
+            target="_blank"
+            rel="noopener">
+            💬 WhatsApp वर ऑर्डर करा
+        </a>
+
+        <a
+            href="https://wa.me/919699091233?text=Hello%20Gharkul%20Parivar%20Sanstha%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products."
+            class="btn whatsapp-btn"
+            target="_blank"
+            rel="noopener">
+            💬 WhatsApp वर ऑर्डर करा - 96990 91233
+        </a>
+
+        <a href="tel:+919860552324" class="btn call-btn">
+            📞 Call करा
+        </a>
+
+        <a href="tel:+919699091233" class="btn call-btn">
+            📞 Call करा - 96990 91233
+        </a>
+    </div>
+</section>
+
+<section>
+    <div class="support">
+        <h2>💛 Support Gharkul</h2>
+
+        <p>
+            तुमची प्रत्येक खरेदी केवळ एक उत्पादन खरेदी नसून,
+            कौशल्यांना प्रोत्साहन देणारे आणि स्वावलंबनाला हातभार
+            लावणारे एक छोटेसे पाऊल आहे.
+        </p>
+    </div>
+</section>
+
+<section>
+    <div class="contact">
+        <h2 class="section-title">📞 संपर्क</h2>
+
+        <div class="contact-info">
+            <p><strong>Gharkul Parivar Sanstha</strong></p>
+            <p>Pimpalgaon Bahula, Trimbak Road, Nashik</p>
+            <p>📱 +91 98605 52324</p>
+        </div>
+
+        <a href="tel:+919860552324" class="btn call-btn">
+            📞 Call Us
+        </a>
+
+        <a
+            href="https://wa.me/919860552324"
+            class="btn whatsapp-btn"
+            target="_blank"
+            rel="noopener">
+            💬 WhatsApp
+        </a>
+
+        <a
+            href="https://www.google.com/maps/search/?api=1&query=Gharkul+Parivar+Sanstha+Pimpalgaon+Bahula+Trimbak+Road+Nashik"
+            class="btn map-btn"
+            target="_blank"
+            rel="noopener">
+            📍 View Location
+        </a>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Gharkul Parivar Sanstha</p>
+    <p>Made with ❤️ for Gharkul</p>
+</footer>
+
+
+<script type="module">
+  import {
+    initializeApp,
+    getApps,
+    getApp
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+  import {
+    getFirestore,
+    collection,
+    getDocs
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZewUAZpkjiEvN1ShvtrGRCUNA0qckJtY",
+    authDomain: "gharkul-qrcode.firebaseapp.com",
+    projectId: "gharkul-qrcode",
+    storageBucket: "gharkul-qrcode.firebasestorage.app",
+    messagingSenderId: "688092451164",
+    appId: "1:688092451164:web:b66eb674f96cd951b0b199"
+  };
+
+  const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Spaces, punctuation and letter case won't prevent a match.
+  const normalize = (value) =>
+    String(value ?? "").toLowerCase().replace(/[^a-z0-9]/g, "");
+
+  // HTML key -> Firestore document ID aliases where the names differ.
+  const aliases = {
+    "shengdanyacheladu": "ladu",
+    "udidpapad": "udiddiskopapad"
+  };
+
+  async function loadPrices() {
+    const status = document.getElementById("price-status");
+
+    try {
+      const snapshot = await getDocs(collection(db, "FoodItem"));
+      const prices = new Map();
+
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        if (data.price === undefined || data.price === null) return;
+
+        const price = Number(data.price);
+        if (!Number.isFinite(price)) return;
+
+        prices.set(normalize(docSnap.id), price);
+        if (data.name) prices.set(normalize(data.name), price);
+      });
+
+      let updated = 0;
+      const unmatched = [];
+
+      document.querySelectorAll(".product-card[data-product-key]").forEach((card) => {
+        const key = normalize(card.dataset.productKey);
+        const firestoreKey = aliases[key] || key;
+        const priceElement = card.querySelector(".price");
+
+        if (!priceElement) {
+          unmatched.push(card.dataset.productKey + " (price element missing)");
+          return;
+        }
+
+        if (!prices.has(firestoreKey)) {
+          unmatched.push(card.dataset.productKey);
+          return;
+        }
+
+        const price = prices.get(firestoreKey);
+        priceElement.textContent = "₹" + price;
+
+        // Update per-kg price only for products whose weight is stated in grams.
+        const weightText = card.querySelector(".weight")?.textContent || "";
+        const gramsMatch = weightText.match(/(\d+)\s*ग्रॅम/);
+        const perKgElement = card.querySelector(".per-kg");
+
+        if (perKgElement && gramsMatch) {
+          const grams = Number(gramsMatch[1]);
+          if (grams > 0) {
+            perKgElement.textContent =
+              "₹" + Math.round(price * 1000 / grams) + " / किलो";
+          }
+        } else if (perKgElement && /1\s*किलो/.test(weightText)) {
+          perKgElement.textContent = "₹" + price + " / किलो";
+        }
+
+        updated++;
+      });
+
+      if (status) {
+        status.textContent = `किंमती अपडेट झाल्या: ${updated} पदार्थ`;
+      }
+
+      console.log("Firestore products loaded:", snapshot.size);
+      if (unmatched.length) {
+        console.warn("या product keys साठी Firestore price match मिळाला नाही:", unmatched);
+      }
+    } catch (error) {
+      console.error("Firebase price loading error:", error);
+      if (status) {
+        status.textContent =
+          "किंमती लोड झाल्या नाहीत. इंटरनेट आणि Firestore permissions तपासा.";
+      }
+    }
+  }
+
+  loadPrices();
+</script>
+
+</body>
+</html>
