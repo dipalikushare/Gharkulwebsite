@@ -315,72 +315,36 @@
 
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 import {
     getFirestore,
     collection,
     getDocs,
     updateDoc,
     doc
-    
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 import {
     getAuth,
-    onAuthStateChanged,
-    sendEmailVerification
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-// 🔥 YOUR FIREBASE CONFIG
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDZewUAZpkjiEvN1ShvtrGRCUNA0qckJtY",
-  authDomain: "gharkul-qrcode.firebaseapp.com",
-  projectId: "gharkul-qrcode",
-  storageBucket: "gharkul-qrcode.firebasestorage.app",
-  messagingSenderId: "688092451164",
-  appId: "1:688092451164:web:b66eb674f96cd951b0b199"
+    apiKey: "AIzaSyDZewUAZpkjiEvN1ShvtrGRCUNA0qckJtY",
+    authDomain: "gharkul-qrcode.firebaseapp.com",
+    projectId: "gharkul-qrcode",
+    storageBucket: "gharkul-qrcode.firebasestorage.app",
+    messagingSenderId: "688092451164",
+    appId: "1:688092451164:web:b66eb674f96cd951b0b199"
 };
 
-
-// Firebase सुरू करा
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-onAuthStateChanged(auth, async (user) => {
+const message = document.getElementById("message");
 
-    if (user) {
-
-        document.body.style.display = "block";
-
-        console.log("Email:", user.email);
-        console.log("Verified:", user.emailVerified);
-
-        if (!user.emailVerified) {
-
-            try {
-
-                await sendEmailVerification(user);
-
-                document.getElementById("message").innerHTML =
-                    "Verification email पाठवला! Gmail तपासा.";
-
-            } catch (error) {
-
-                console.error("Verification error:", error);
-
-                document.getElementById("message").innerHTML =
-                    "Email error: " + error.message;
-            }
-        }
-
-    } else {
-
-        window.location.replace("login.html");
-
-    }
-
-});
-// सर्व product IDs
 const productMap = {
     "poheChivda": "Pohe chiwda",
     "kharipuri": "khari puri",
@@ -403,63 +367,85 @@ const productMap = {
     "udidDiscoPapad": "Udid disko papad"
 };
 
-// Firebase मधून prices load करा
-
-
-            async function loadPrices() {
+// Login तपासल्यानंतरच Firebase मधून prices load करा
+onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+        window.location.replace("login.html");
+        return;
+    }
 
     try {
+        await user.reload();
+
+        const currentUser = auth.currentUser;
+
+        if (!currentUser || !currentUser.emailVerified) {
+            message.style.color = "red";
+            message.textContent =
+                "कृपया verified admin email ने पुन्हा login करा.";
+            return;
+        }
+
+        console.log("Logged in:", currentUser.email);
+
+        await loadPrices();
+
+    } catch (error) {
+        console.error("Authentication error:", error);
+        message.style.color = "red";
+        message.textContent =
+            "Login तपासताना त्रुटी आली. पुन्हा login करा.";
+    }
+});
+
+// Firebase मधून किंमती load करा
+async function loadPrices() {
+    try {
+        message.style.color = "green";
+        message.textContent = "किंमती load होत आहेत...";
 
         const snapshot = await getDocs(
             collection(db, "FoodItem")
         );
-        console.log("Firebase documents:", snapshot.size);
-
-snapshot.forEach((item) => {
-    console.log("Document ID:", item.id, "Price:", item.data().price);
-});
-        console.log("Firebase documents:", snapshot.size);
 
         snapshot.forEach((item) => {
-
             const firestoreId = item.id;
             const data = item.data();
 
             for (const adminId in productMap) {
-
                 if (productMap[adminId] === firestoreId) {
-
                     const input = document.getElementById(adminId);
 
                     if (input && data.price !== undefined) {
                         input.value = data.price;
                     }
-
                 }
-
             }
-
         });
 
-        document.getElementById("message").innerHTML =
-            "किंमती Firebase मधून लोड झाल्या! ✅";
+        message.style.color = "green";
+        message.textContent =
+            "किंमती Firebase मधून load झाल्या! ✅";
 
     } catch (error) {
-
-        console.error(error);
-
-        document.getElementById("message").innerHTML =
-            "किंमती load करता आल्या नाहीत ❌";
-
+        console.error("Load prices error:", error);
+        message.style.color = "red";
+        message.textContent =
+            "किंमती load करता आल्या नाहीत: " + error.message;
     }
-
 }
 
-// Firebase मध्ये prices save करा
-    window.savePrices = async function() {
-    const message = document.getElementById("message");
+// बदललेल्या किंमती Firebase मध्ये save करा
+window.savePrices = async function () {
+    if (!auth.currentUser || !auth.currentUser.emailVerified) {
+        message.style.color = "red";
+        message.textContent =
+            "कृपया आधी verified admin account ने login करा.";
+        return;
+    }
 
-    message.innerHTML = "किंमती जतन होत आहेत...";
+    message.style.color = "#666";
+    message.textContent = "किंमती जतन होत आहेत...";
 
     try {
         for (const adminId in productMap) {
@@ -468,10 +454,14 @@ snapshot.forEach((item) => {
 
             if (!input) continue;
 
+            if (input.value.trim() === "") {
+                throw new Error("कृपया सर्व किंमती भरा.");
+            }
+
             const newPrice = Number(input.value);
 
-            if (input.value.trim() === "" || !Number.isFinite(newPrice) || newPrice < 0) {
-                throw new Error("कृपया सर्व किंमती योग्य प्रकारे भरा.");
+            if (!Number.isFinite(newPrice) || newPrice < 0) {
+                throw new Error("किंमत योग्य प्रकारे भरा.");
             }
 
             await updateDoc(
@@ -480,21 +470,17 @@ snapshot.forEach((item) => {
             );
         }
 
-        message.innerHTML = "किंमती Firebase मध्ये जतन झाल्या! ✅";
+        message.style.color = "green";
+        message.textContent =
+            "सर्व किंमती Firebase मध्ये जतन झाल्या! ✅";
 
     } catch (error) {
-        console.error("Save error:", error);
-        message.innerHTML = "किंमत जतन करताना त्रुटी: " + error.message;
+        console.error("Save prices error:", error);
+        message.style.color = "red";
+        message.textContent =
+            "किंमत जतन करताना त्रुटी: " + error.message;
     }
 };
-           
-
-
-
-// Page उघडल्यावर prices load
-loadPrices();
-
 </script>
-
 </body>
 </html>
