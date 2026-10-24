@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="mr">
-k
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@ k
             margin: 0;
             color: #333;
         }
-j
+
         header {
             background: linear-gradient(135deg, #6b1f2a, #8b303d);
             color: white;
@@ -305,7 +305,7 @@ j
     </div>
 
 
-    <button class="save-btn" onclick="savePrices()">
+    <button type="button" class="save-btn" onclick="savePrices()">
         💾 किंमती जतन करा
     </button>
 
@@ -323,25 +323,63 @@ import {
     getDocs,
     updateDoc,
     doc
+    
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
+import {
+    getAuth,
+    onAuthStateChanged,
+    sendEmailVerification
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 // 🔥 YOUR FIREBASE CONFIG
 const firebaseConfig = {
-    apiKey: "AIzaSyBo_uwkCTvpDL4jys5TsMrjtlz4HwIiRdo",
-    authDomain: "gharkul-parivar.firebaseapp.com",
-    projectId: "gharkul-qrcode",
-    storageBucket: "gharkul-parivar.firebasestorage.app",
-    messagingSenderId: "468575393306",
-    appId: "1:468575393306:web:71e4deceb42d8eeeafa3a3",
-    measurementId: "G-9SHMT64HPX"
+  apiKey: "AIzaSyDZewUAZpkjiEvN1ShvtrGRCUNA0qckJtY",
+  authDomain: "gharkul-qrcode.firebaseapp.com",
+  projectId: "gharkul-qrcode",
+  storageBucket: "gharkul-qrcode.firebasestorage.app",
+  messagingSenderId: "688092451164",
+  appId: "1:688092451164:web:b66eb674f96cd951b0b199"
 };
 
 
 // Firebase सुरू करा
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
+onAuthStateChanged(auth, async (user) => {
 
+    if (user) {
+
+        document.body.style.display = "block";
+
+        console.log("Email:", user.email);
+        console.log("Verified:", user.emailVerified);
+
+        if (!user.emailVerified) {
+
+            try {
+
+                await sendEmailVerification(user);
+
+                document.getElementById("message").innerHTML =
+                    "Verification email पाठवला! Gmail तपासा.";
+
+            } catch (error) {
+
+                console.error("Verification error:", error);
+
+                document.getElementById("message").innerHTML =
+                    "Email error: " + error.message;
+            }
+        }
+
+    } else {
+
+        window.location.replace("login.html");
+
+    }
+
+});
 // सर्व product IDs
 const productMap = {
     "poheChivda": "Pohe chiwda",
@@ -373,8 +411,13 @@ const productMap = {
     try {
 
         const snapshot = await getDocs(
-            collection(db, "FoodItems")
+            collection(db, "FoodItem")
         );
+        console.log("Firebase documents:", snapshot.size);
+
+snapshot.forEach((item) => {
+    console.log("Document ID:", item.id, "Price:", item.data().price);
+});
         console.log("Firebase documents:", snapshot.size);
 
         snapshot.forEach((item) => {
@@ -413,34 +456,38 @@ const productMap = {
 }
 
 // Firebase मध्ये prices save करा
-window.savePrices = async function() {
+    window.savePrices = async function() {
+    const message = document.getElementById("message");
+
+    message.innerHTML = "किंमती जतन होत आहेत...";
+
     try {
         for (const adminId in productMap) {
             const firestoreId = productMap[adminId];
             const input = document.getElementById(adminId);
 
-            if (input) {
-                const newPrice = Number(input.value);
+            if (!input) continue;
 
-                await updateDoc(
-                    doc(db, "FoodItems", firestoreId),
-                    {
-                        price: newPrice
-                    }
-                );
+            const newPrice = Number(input.value);
+
+            if (input.value.trim() === "" || !Number.isFinite(newPrice) || newPrice < 0) {
+                throw new Error("कृपया सर्व किंमती योग्य प्रकारे भरा.");
             }
+
+            await updateDoc(
+                doc(db, "FoodItem", firestoreId),
+                { price: newPrice }
+            );
         }
 
-        document.getElementById("message").innerHTML =
-            "किंमती Firebase मध्ये यशस्वीरित्या जतन झाल्या! ✅";
+        message.innerHTML = "किंमती Firebase मध्ये जतन झाल्या! ✅";
 
     } catch (error) {
-        console.error(error);
-
-        document.getElementById("message").innerHTML =
-            "ERROR: " + error.message;
+        console.error("Save error:", error);
+        message.innerHTML = "किंमत जतन करताना त्रुटी: " + error.message;
     }
 };
+           
 
 
 
